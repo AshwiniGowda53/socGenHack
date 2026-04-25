@@ -1,0 +1,65 @@
+{
+  "payees": [
+    {
+      "name": "Bridge Foundation",
+      "account": "ES50 2134 4954 44433224",
+      "bank": "BBVA",
+      "id": "1"
+    },
+    {
+      "id": "2",
+      "name": "Ramón Curado Garcia",
+      "account": "ES50 2134 4954 4443 3333",
+      "bank": "ING"
+    },
+    {
+      "id": "3",
+      "name": "Vodafone Spain",
+      "account": "ES50 2134 4954 4443 4444",
+      "bank": "BNP"
+    },
+    {
+      "id": "4",
+      "name": "Electric Company ENDESA",
+      "account": "ES91 2100 0418 4502 0005 1332",
+      "bank": "Santander"
+    },
+    {
+      "id": "5",
+      "name": "Water Utility AQUAGEST",
+      "account": "ES75 2038 0001 1857 0007 8910",
+      "bank": "CaixaBank"
+    },
+    {
+      "id": "6",
+      "name": "Insurance Seguros AGF",
+      "account": "ES6621546400000001432112",
+      "bank": "BBVA"
+    },
+    {
+      "id": "7",
+      "name": "Telecom Orange",
+      "account": "ES9121000418450200051332",
+      "bank": "Sabadell"
+    },
+    {
+      "id": "8",
+      "name": "Gas Natural SDG",
+      "account": "ES1420770338590000001234",
+      "bank": "ING"
+    },
+    {
+      "id": "9",
+      "name": "Healthcare Clinic Dr. López",
+      "account": "ES7700815123456789012345",
+      "bank": "BNP"
+    },
+    {
+      "id": "10",
+      "name": "Restaurant Casa Pepe",
+      "account": "ES4620770338590000001234",
+      "bank": "Santander"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
