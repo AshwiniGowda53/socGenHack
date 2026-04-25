@@ -11,14 +11,18 @@ export default defineConfig({
     tailwindcss(),
   ],
   test: {
-    environment: 'jsdom',
     globals: true,
-    setupFiles: './src/setupTests.js',
-     coverage: {
-      provider: "v8",
-      reporter: ["text", "html"], 
+    environment: "jsdom",
+    setupFiles: "./src/setupTests.js",
+    coverage: {
+      provider: "v8",              
+      reporter: ["text", "html"],
       reportsDirectory: "./coverage",
-      exclude: ["node_modules/", "src/setupTests.js"]
-    }
+      exclude: [
+        "node_modules/",
+        "src/setupTests.js",
+        "**/*.test.*",
+      ],
+    },
   },
 })
