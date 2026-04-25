@@ -1,6 +1,7 @@
 import { useAuth } from "../auth/AuthContext"
 import { Button, Typography } from "antd"
 import { useNavigate } from "react-router-dom"
+import Favorite from "../components/Favorite"
 
 const { Title } = Typography
 
@@ -9,8 +10,8 @@ const Dashboard = () => {
   const navigate = useNavigate()
 
   const handleLogout = () => {
-    logout()          // clears tokens
-    navigate("/")     // redirect to login
+    logout()
+    navigate("/")
   }
 
   return (
@@ -29,9 +30,7 @@ const Dashboard = () => {
 
       {/* Content */}
       <main style={styles.content}>
-        <div style={styles.placeholder}>
-          🚀 Your features will go here
-        </div>
+        <Favorite />
       </main>
 
     </div>
@@ -40,7 +39,7 @@ const Dashboard = () => {
 
 const styles = {
   container: {
-    height: "100vh",
+    minHeight: "100vh",
     background: "linear-gradient(135deg, #1d2671, #c33764)",
     display: "flex",
     flexDirection: "column"
@@ -50,27 +49,22 @@ const styles = {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    padding: "20px 30px"
+    padding: "16px 24px",
+    backdropFilter: "blur(8px)",
+    background: "rgba(255,255,255,0.08)",
+    borderBottom: "1px solid rgba(255,255,255,0.15)"
   },
 
   title: {
     color: "#fff",
-    margin: 0
+    margin: 0,
+    fontWeight: 600
   },
 
   content: {
     flex: 1,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center"
-  },
-
-  placeholder: {
-    background: "#fff",
-    padding: "40px",
-    borderRadius: "12px",
-    fontSize: "18px",
-    boxShadow: "0 10px 30px rgba(0,0,0,0.2)"
+    padding: "16px",
+    overflow: "auto"
   }
 }
 

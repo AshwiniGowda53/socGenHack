@@ -1,5 +1,4 @@
 import Cookies from "js-cookie"
-
 export const setTokens = (access, refresh) => {
   Cookies.set("accessToken", access)
   Cookies.set("refreshToken", refresh)
