@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { Table, Button, Space, Popconfirm, Tooltip } from "antd";
+import { Table, Button, Space, Tooltip, Modal } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 
 const getBankColor = (bank) => {
@@ -15,6 +15,20 @@ const getBankColor = (bank) => {
 };
 
 const TableComponent = ({ payees, onEdit, onDelete, loading }) => {
+
+  const confirmDelete = (id) => {
+    Modal.confirm({
+      title: "Delete Payee?",
+      content: "Are you sure you want to delete this payee?",
+      okText: "Yes",
+      okType: "danger",
+      cancelText: "No",
+      onOk: () => {
+        onDelete(id);
+      },
+    });
+  };
+
   const columns = useMemo(
     () => [
       {
@@ -46,7 +60,7 @@ const TableComponent = ({ payees, onEdit, onDelete, loading }) => {
         render: (text) => (
           <span
             className={`px-3 py-1 text-white text-xs rounded-full ${getBankColor(
-              text,
+              text
             )}`}
           >
             {text}
@@ -62,17 +76,19 @@ const TableComponent = ({ payees, onEdit, onDelete, loading }) => {
               size="small"
               onClick={() => onEdit(record)}
             />
-            <Popconfirm
-              title="Delete Payee?"
-              onConfirm={() => onDelete(record.id)}
-            >
-              <Button danger icon={<DeleteOutlined />} size="small" />
-            </Popconfirm>
+
+            <Button
+              danger
+              icon={<DeleteOutlined />}
+              size="small"
+              type="primary"
+              onClick={() => confirmDelete(record.id)}
+            />
           </Space>
         ),
       },
     ],
-    [onEdit, onDelete],
+    [onEdit, onDelete]
   );
 
   return (

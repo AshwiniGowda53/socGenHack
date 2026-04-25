@@ -39,28 +39,8 @@ const Favorite = () => {
       setFilteredPayees(data);
     } catch (error) {
       message.error("Failed to load payees: " + error.message);
-      const fallbackData = [
-        {
-          id: 1,
-          name: "Bridge Foundation",
-          account: "ES50 2134 4954 4443 2222",
-          bank: "BBVA",
-        },
-        {
-          id: 2,
-          name: "Ramón Curado Garcia",
-          account: "ES50 2134 4954 4443 2222",
-          bank: "ING",
-        },
-        {
-          id: 3,
-          name: "Vodafone Spain",
-          account: "ES50 2134 4954 4443 2222",
-          bank: "BNP",
-        },
-      ];
-      setPayees(fallbackData);
-      setFilteredPayees(fallbackData);
+      setPayees([]);
+      setFilteredPayees([]);
     } finally {
       setLoading(false);
     }
@@ -132,9 +112,11 @@ const Favorite = () => {
   const handleDeletePayee = async (id) => {
     console.log("Deleting payee with ID:", id);
     try {
-      const response = await fetch(`http://localhost:3000/payees/${id}`, {
-        method: "DELETE",
-      });
+      if (req.url.origin === "http://localhost:3001") {
+        const response = await fetch(`http://localhost:3001/payees/${id}`, {
+          method: "DELETE",
+        });
+      }
 
       if (!response.ok) throw new Error("Failed to delete payee");
       await fetchPayees();
@@ -155,10 +137,11 @@ const Favorite = () => {
   return (
     <div className="min-h-screen bg-transparent">
       <div className="ml-4 text-3xl font-bold text-white mb-2">
-        Favourite payees      
+        Favourite payees
       </div>
       <div className="ml-4 text-sm text-gray-500 mb-4">
-        Manage your most frequently used payees for quick access during transfers.
+        Manage your most frequently used payees for quick access during
+        transfers.
       </div>
       <div className="px-4 md:px-10 py-6">
         <div className="w-full">
@@ -173,33 +156,33 @@ const Favorite = () => {
             />
 
             <Tooltip
-  title={
-    isLimitReached
-      ? "Maximum limit reached (20 payees allowed)"
-      : "Add a new payee"
-  }
->
-  <Button
-    type="primary"
-    size="large"
-    icon={<PlusOutlined />}
-    disabled={isLimitReached}
-    onClick={() => {
-      if (!isLimitReached) {
-        setEditingPayee(null);
-        setIsModalOpen(true);
-      }
-    }}
-    className={`sm:w-auto w-full h-12 font-semibold rounded-xl border-0 shadow-md transition-all text-white 
+              title={
+                isLimitReached
+                  ? "Maximum limit reached (20 payees allowed)"
+                  : "Add a new payee"
+              }
+            >
+              <Button
+                type="primary"
+                size="large"
+                icon={<PlusOutlined />}
+                disabled={isLimitReached}
+                onClick={() => {
+                  if (!isLimitReached) {
+                    setEditingPayee(null);
+                    setIsModalOpen(true);
+                  }
+                }}
+                className={`sm:w-auto w-full h-12 font-semibold rounded-xl border-0 shadow-md transition-all text-white 
       ${
         isLimitReached
           ? "bg-gray-400 cursor-not-allowed"
           : "bg-blue-600 hover:bg-blue-700"
       }`}
-  >
-    Add Payee
-  </Button>
-</Tooltip>
+              >
+                Add Payee
+              </Button>
+            </Tooltip>
           </div>
 
           {searchTerm && (
