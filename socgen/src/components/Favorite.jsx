@@ -3,7 +3,7 @@ import { Button, Input, message, Empty, Spin } from "antd";
 import { PlusOutlined, SearchOutlined } from "@ant-design/icons";
 import TableComponent from "./tableComponent";
 import PayeeModal from "./PayeeModal";
-
+import { Tooltip } from "antd";
 const Favorite = () => {
   const [payees, setPayees] = useState([]);
   const [filteredPayees, setFilteredPayees] = useState([]);
@@ -11,6 +11,7 @@ const Favorite = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingPayee, setEditingPayee] = useState(null);
   const [loading, setLoading] = useState(false);
+  const isLimitReached = payees.length >= 20;
 
   const useDebounce = (value, delay) => {
     const [debouncedValue, setDebouncedValue] = useState(value);
@@ -129,6 +130,7 @@ const Favorite = () => {
   };
 
   const handleDeletePayee = async (id) => {
+    console.log("Deleting payee with ID:", id);
     try {
       const response = await fetch(`http://localhost:3000/payees/${id}`, {
         method: "DELETE",
@@ -170,18 +172,34 @@ const Favorite = () => {
               allowClear
             />
 
-            <Button
-              type="primary"
-              size="large"
-              icon={<PlusOutlined />}
-              onClick={() => {
-                setEditingPayee(null);
-                setIsModalOpen(true);
-              }}
-              className="sm:w-auto w-full h-12 font-semibold rounded-xl bg-blue-600 hover:bg-blue-700 border-0 shadow-md hover:shadow-lg transition-all"
-            >
-              Add Payee
-            </Button>
+            <Tooltip
+  title={
+    isLimitReached
+      ? "Maximum limit reached (20 payees allowed)"
+      : "Add a new payee"
+  }
+>
+  <Button
+    type="primary"
+    size="large"
+    icon={<PlusOutlined />}
+    disabled={isLimitReached}
+    onClick={() => {
+      if (!isLimitReached) {
+        setEditingPayee(null);
+        setIsModalOpen(true);
+      }
+    }}
+    className={`sm:w-auto w-full h-12 font-semibold rounded-xl border-0 shadow-md transition-all text-white 
+      ${
+        isLimitReached
+          ? "bg-gray-400 cursor-not-allowed"
+          : "bg-blue-600 hover:bg-blue-700"
+      }`}
+  >
+    Add Payee
+  </Button>
+</Tooltip>
           </div>
 
           {searchTerm && (

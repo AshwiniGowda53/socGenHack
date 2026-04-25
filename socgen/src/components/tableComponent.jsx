@@ -46,7 +46,7 @@ const TableComponent = ({ payees, onEdit, onDelete, loading }) => {
         render: (text) => (
           <span
             className={`px-3 py-1 text-white text-xs rounded-full ${getBankColor(
-              text
+              text,
             )}`}
           >
             {text}
@@ -72,7 +72,7 @@ const TableComponent = ({ payees, onEdit, onDelete, loading }) => {
         ),
       },
     ],
-    [onEdit, onDelete]
+    [onEdit, onDelete],
   );
 
   return (
@@ -82,7 +82,12 @@ const TableComponent = ({ payees, onEdit, onDelete, loading }) => {
         dataSource={payees}
         rowKey="id"
         loading={loading}
-        pagination={{ pageSize: 8 }}
+        pagination={{
+          pageSize: 5,
+          showSizeChanger: false,
+          showQuickJumper: true,
+          showTotal: (total) => `Total ${total} records`,
+        }}
         scroll={{ x: true }}
       />
     </div>
