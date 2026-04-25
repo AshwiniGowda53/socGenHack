@@ -22,7 +22,9 @@ const PayeeModal = ({ isOpen, onClose, onSubmit, editingPayee }) => {
       form.resetFields();
       onClose();
       message.success(
-        editingPayee ? "Payee updated successfully! ✅" : "Payee added successfully! ✅"
+        editingPayee
+          ? "Payee updated successfully!"
+          : "Payee added successfully!",
       );
     } catch (error) {
       message.error("Failed to save payee ❌");
@@ -54,14 +56,18 @@ const PayeeModal = ({ isOpen, onClose, onSubmit, editingPayee }) => {
       >
         <Form.Item
           name="name"
-          label={<span className="font-bold text-gray-800 text-base">👤 Payee Name</span>}
+          label={
+            <span className="font-bold text-gray-800 text-base">
+              👤 Payee Name
+            </span>
+          }
           rules={[
             { required: true, message: "Please enter payee name" },
             { min: 2, message: "Name must be at least 2 characters" },
           ]}
         >
-          <Input 
-            placeholder="Enter payee name" 
+          <Input
+            placeholder="Enter payee name"
             className="h-10 rounded-lg border-2 border-blue-200 focus:border-blue-500"
             maxLength={100}
           />
@@ -69,14 +75,18 @@ const PayeeModal = ({ isOpen, onClose, onSubmit, editingPayee }) => {
 
         <Form.Item
           name="account"
-          label={<span className="font-bold text-gray-800 text-base">💳 Account Number</span>}
+          label={
+            <span className="font-bold text-gray-800 text-base">
+              💳 Account Number
+            </span>
+          }
           rules={[
             { required: true, message: "Please enter account number" },
             { min: 10, message: "Account number must be valid" },
           ]}
         >
-          <Input 
-            placeholder="Enter account number" 
+          <Input
+            placeholder="Enter account number"
             className="h-10 rounded-lg border-2 border-blue-200 focus:border-blue-500 font-mono"
             maxLength={50}
           />
@@ -84,19 +94,20 @@ const PayeeModal = ({ isOpen, onClose, onSubmit, editingPayee }) => {
 
         <Form.Item
           name="bank"
-          label={<span className="font-bold text-gray-800 text-base">🏦 Bank Name</span>}
-          rules={[{ required: true, message: "Please select a bank" }]}
+          label={
+            <span className="font-bold text-gray-800 text-base">
+              🏦 Bank Name
+            </span>
+          }
+          rules={[
+            { required: true, message: "Please enter bank name" },
+            { min: 2, message: "Bank name must be at least 2 characters" },
+          ]}
         >
-          <Select
-            placeholder="Select a bank"
-            options={[
-              { label: "🏦 BBVA", value: "BBVA" },
-              { label: "🏦 ING", value: "ING" },
-              { label: "🏦 BNP", value: "BNP" },
-              { label: "🏦 Santander", value: "Santander" },
-              { label: "🏦 CaixaBank", value: "CaixaBank" },
-              { label: "🏦 Sabadell", value: "Sabadell" },
-            ]}
+          <Input
+            placeholder="Enter bank name (e.g., HDFC, ICICI, SBI)"
+            className="h-10 rounded-lg border-2 border-blue-200 focus:border-blue-500"
+            maxLength={50}
           />
         </Form.Item>
 
@@ -110,8 +121,8 @@ const PayeeModal = ({ isOpen, onClose, onSubmit, editingPayee }) => {
           >
             ✕ Cancel
           </Button>
-          <Button 
-            type="primary" 
+          <Button
+            type="primary"
             htmlType="submit"
             className="rounded-lg h-10 font-semibold bg-gradient-to-r from-green-500 to-emerald-600 border-0 text-white"
           >

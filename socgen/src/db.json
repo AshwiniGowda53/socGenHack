@@ -59,6 +59,18 @@
       "name": "Restaurant Casa Pepe",
       "account": "ES4620770338590000001234",
       "bank": "Santander"
+    },
+    {
+      "name": "jayakrishna",
+      "account": "ES50 2134 4954 44433224",
+      "bank": "HDFC",
+      "id": "ZdOyahVlt-Y"
+    },
+    {
+      "name": "krishna",
+      "account": "ES50 2134 4954 44433267",
+      "bank": "sbi",
+      "id": "jArQTuX--jY"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
