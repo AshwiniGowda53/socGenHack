@@ -10,4 +10,15 @@ export default defineConfig({
     babel({ presets: [reactCompilerPreset()] }),
     tailwindcss(),
   ],
+  test: {
+    environment: 'jsdom',
+    globals: true,
+    setupFiles: './src/setupTests.js',
+     coverage: {
+      provider: "v8",
+      reporter: ["text", "html"], 
+      reportsDirectory: "./coverage",
+      exclude: ["node_modules/", "src/setupTests.js"]
+    }
+  },
 })
