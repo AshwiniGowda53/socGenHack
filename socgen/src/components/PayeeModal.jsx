@@ -45,8 +45,10 @@ const PayeeModal = ({ isOpen, onClose, onSubmit, editingPayee }) => {
       }}
       footer={null}
       width={500}
-      bodyStyle={{ padding: "24px" }}
-      maskStyle={{ backgroundColor: "rgba(0, 0, 0, 0.45)" }}
+      styles={{
+        mask: { backgroundColor: "rgba(0,0,0,0.5)" },
+        body: { padding: "24px" },
+      }}
     >
       <Form
         form={form}

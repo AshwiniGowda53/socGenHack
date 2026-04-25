@@ -4,6 +4,7 @@ import { PlusOutlined, SearchOutlined } from "@ant-design/icons";
 import TableComponent from "./tableComponent";
 import PayeeModal from "./PayeeModal";
 import { Tooltip } from "antd";
+import useDebounce from "../hooks/useDebounce";
 const Favorite = () => {
   const [payees, setPayees] = useState([]);
   const [filteredPayees, setFilteredPayees] = useState([]);
@@ -13,19 +14,6 @@ const Favorite = () => {
   const [loading, setLoading] = useState(false);
   const isLimitReached = payees.length >= 20;
 
-  const useDebounce = (value, delay) => {
-    const [debouncedValue, setDebouncedValue] = useState(value);
-
-    useEffect(() => {
-      const handler = setTimeout(() => {
-        setDebouncedValue(value);
-      }, delay);
-
-      return () => clearTimeout(handler);
-    }, [value, delay]);
-
-    return debouncedValue;
-  };
 
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
